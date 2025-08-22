@@ -66,7 +66,7 @@ func createIndexes(db *sql.DB) error {
 		"CREATE INDEX IF NOT EXISTS idx_email_events_campaign ON email_events(campaign_id);",
 	}
 
-	for i, indexQuery := range indexQueries {
+	for _, indexQuery := range indexQueries {
 		_, err := db.Exec(indexQuery)
 		if err != nil {
 			return err
