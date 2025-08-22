@@ -1,11 +1,15 @@
 package domain
 
 type EmailEvent struct {
-    Type      string                 `json:"type"`
-    Email     string                 `json:"email"`
-    Site      string                 `json:"site"`
-    Timestamp string                 `json:"timestamp"`
-    Metadata  map[string]interface{} `json:"metadata,omitempty"`
+    Type        string                 `json:"type"`
+    Email       string                 `json:"email"`
+    Site        string                 `json:"site"`
+    Timestamp   string                 `json:"timestamp"`
+    CampaignID  string                 `json:"campaign_id,omitempty"`
+    Subject     string                 `json:"subject,omitempty"`
+    IPAddress   string                 `json:"ip_address,omitempty"`
+    UserAgent   string                 `json:"user_agent,omitempty"`
+    Metadata    map[string]interface{} `json:"metadata,omitempty"`
 }
 
 type EventsRequest struct {
