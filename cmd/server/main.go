@@ -8,8 +8,10 @@ import (
     "time"
 
     "github.com/gorilla/mux"
+    "github.com/nathaliaoliveira/goapp/internal/database"
     "github.com/nathaliaoliveira/goapp/internal/handler"
     "github.com/nathaliaoliveira/goapp/internal/repository"
+    "github.com/nathaliaoliveira/goapp/internal/seeds"
     "github.com/nathaliaoliveira/goapp/internal/service"
 )
 
@@ -19,15 +21,19 @@ func main() {
     jwtSecret := generateJWTSecret()
     log.Printf("JWT Secret gerado: %x", jwtSecret)
 
-    dbConfig := repository.NewDatabaseConfig()
+    dbConfig := database.NewDatabaseConfig()
     db, err := dbConfig.Connect()
     if err != nil {
         log.Fatal("❌ Erro ao conectar ao banco:", err)
     }
     defer db.Close()
 
-    if err := repository.CreateTables(db); err != nil {
-        log.Fatal("❌ Erro ao criar tabelas:", err)
+    if err := database.RunMigrations(db); err != nil {
+        log.Fatal("❌ Erro ao executar migrações:", err)
+    }
+    
+    if err := seeds.RunSeeds(db); err != nil {
+        log.Printf("⚠️ Aviso: Erro ao executar seeds: %v", err)
     }
 
     userRepo := repository.NewUserRepository(db)

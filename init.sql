@@ -27,9 +27,6 @@ CREATE INDEX IF NOT EXISTS idx_email_events_timestamp ON email_events(timestamp)
 CREATE INDEX IF NOT EXISTS idx_email_events_campaign ON email_events(campaign_id);
 CREATE INDEX IF NOT EXISTS idx_email_events_content_hash ON email_events(content_hash);
 
-INSERT INTO users (name, email, password_hash, created_at) VALUES 
-('Administrador', 'admin@admin.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2025-08-21T00:00:00Z');
-
 -- Eventos de exemplo com content_hash
 INSERT INTO email_events (event_id, event_type, email, site, timestamp, content_hash, campaign_id, subject, ip_address, user_agent, created_at) VALUES
 ('evt_001', 'sent', 'user@example.com', 'site-a.com', '2025-08-21T10:30:00Z', 'sent|user@example.com|site-a.com|2025-08-21T10:30:00Z', 'camp_123', 'Welcome Email', NULL, NULL, '2025-08-21T10:30:00Z'),
