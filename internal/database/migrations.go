@@ -69,7 +69,6 @@ func createIndexes(db *sql.DB) error {
 	for i, indexQuery := range indexQueries {
 		_, err := db.Exec(indexQuery)
 		if err != nil {
-			log.Printf("❌ Erro ao criar índice %d: %v", i+1, err)
 			return err
 		}
 	}
